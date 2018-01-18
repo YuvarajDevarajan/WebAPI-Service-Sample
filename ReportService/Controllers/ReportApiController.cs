@@ -17,6 +17,10 @@ namespace ReportService.Controllers
          //Post action for processing the rdl/rdlc report 
         public object PostReportAction(Dictionary < string, object > jsonResult) 
         {
+            if (jsonResult != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Headers["Authorization"]))
+            {               
+                var _authToken = HttpContext.Current.Request.Headers["Authorization"];
+            }
             return ReportHelper.ProcessReport(jsonResult, this);
         }
         
