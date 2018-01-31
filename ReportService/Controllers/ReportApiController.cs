@@ -8,6 +8,7 @@ using Syncfusion.EJ.ReportViewer;
 using System.Web.Http.Cors;
 using Syncfusion.Reports.EJ;
 using System.Web;
+using System.Configuration;
 
 namespace ReportService.Controllers
 {
@@ -41,7 +42,8 @@ namespace ReportService.Controllers
         //Method will be called when reported is loaded
         public void OnReportLoaded(ReportViewerOptions reportOption) 
         {
-            //You can update report options here
+            string connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+            reportOption.ReportModel.DataSourceCredentials.Add(new DataSourceCredentials("DataSourceName", connStr));   //DataSource Name should be same as datasource name specfied in RDL        
         }
        
     }
